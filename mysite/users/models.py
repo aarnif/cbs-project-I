@@ -5,7 +5,7 @@ from django.db import models
 
 class User(models.Model):
     username = models.CharField(max_length=200)
-    # FLAW 2: Cryptographic Failures (Storing password in plaintext)
+    # FLAW 2: Identification and Authentication Failures (Storing password in plaintext)
     password = models.CharField(max_length=200)
 
     # FLAW 2 FIX
