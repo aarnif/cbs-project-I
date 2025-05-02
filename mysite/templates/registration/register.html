@@ -1,0 +1,26 @@
+{% block content %}
+<h2>Create User</h2>
+<form method="post">
+    {% csrf_token %}
+    <p style="color: red;">{{error_message}}</p>
+    <div style="max-width: 300px; display: flex; flex-direction: column; gap: 10px;">
+
+        <div style="display: flex; flex-direction: column;">
+            <label>Username</label>
+            <input name="username" />
+        </div>
+
+        <div style="display: flex; flex-direction: column;">
+            <label>Password</label>
+            <input name="password" type="password" />
+        </div>
+
+        <div style="display: flex; flex-direction: column;">
+            <label>Confirm Password</label>
+            <input name="confirm-password" type="password" />
+        </div>
+
+        <button type="submit">Create</button>
+    </div>
+</form>
+{% endblock %}
