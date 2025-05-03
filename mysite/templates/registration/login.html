@@ -1,5 +1,5 @@
 {% block content %}
-<h2>Create User</h2>
+<h2>Login</h2>
 <form method="post">
     {% csrf_token %}
     <p style="color: red;">{{error_message}}</p>
@@ -15,16 +15,12 @@
             <input name="password" type="password" />
         </div>
 
-        <div style="display: flex; flex-direction: column;">
-            <label>Confirm Password</label>
-            <input name="confirm-password" type="password" />
-        </div>
-
-        <button type="submit">Create</button>
-
-        <a href="/login/" style="text-decoration: none; display: block; width: 100%;">
-            <button type="button" style="width: 100%;">Go Back</button>
+        <button type="submit" style="width: 100%;">Login</button>
+      
+        <a href="/register/" style="text-decoration: none; display: block; width: 100%;">
+            <button type="button" style="width: 100%;">Create User</button>
         </a>
+      
     </div>
 </form>
 {% endblock %}
