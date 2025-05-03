@@ -34,6 +34,7 @@ def register(request):
         user.save()
 
         request.session['user_id'] = user.id
+        request.session['username'] = user.username
         
         return redirect('/polls/')
     
@@ -54,6 +55,7 @@ def login(request):
             return render(request, 'registration/login.html', {'error_message': "Invalid username or password"})
         
         request.session['user_id'] = user.id
+        request.session['username'] = user.username
         
         return redirect('/polls/')
         

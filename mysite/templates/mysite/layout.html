@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBS Project I</title>
+</head>
+<body>
+
+    {% if request.session.user_id %}
+        <nav>
+            <ul style="display: flex; gap: 10px; list-style-type: none; padding: 0;">
+                <li>Hi, {{ request.session.username }}!</li>
+                <li><a href="/polls/">Polls</a></li>
+                <li><a href="/logout/">Logout</a></li>
+            </ul>
+        </nav>
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
