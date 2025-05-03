@@ -3,7 +3,9 @@
 {% block content %}
 <h2>Create User</h2>
 <form method="post">
-    {% csrf_token %}
+    <!-- FLAW 4: Cross-Site Request Forgery (CSRF) -->
+    <!-- FLAW 4 FIX -->
+    <!-- {% csrf_token %} -->
     <p style="color: red;">{{error_message}}</p>
     <div style="max-width: 300px; display: flex; flex-direction: column; gap: 10px;">
 
