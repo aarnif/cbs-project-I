@@ -16,10 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.shortcuts import redirect
 from users import views as user_views
 
+
+def is_user_authenticated(request):
+    if 'user_id' in request.session:
+        return redirect('polls:index')
+    return redirect('login')
+
 urlpatterns = [
+    path('', is_user_authenticated, name='root'),
     path('register/', user_views.register, name='register'),
+    path('login/', user_views.login, name='login'),
+    path('logout/', user_views.logout, name='logout'),
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
 ]

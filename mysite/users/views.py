@@ -1,5 +1,4 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db import connection
 from users.models import User
 
@@ -22,7 +21,6 @@ def register(request):
             return render(request, 'registration/register.html', {'error_message': f'Username {username} already exists'})
 
         # FLAW 1 FIX
-        # from .models import User
         # try:
         #     user_exists = User.objects.get(username=username)
         #     return render(request, 'registration/register.html', {'error_message': f'Username {user_exists.username} already exists'})
@@ -32,6 +30,36 @@ def register(request):
         if password != confirm_password:
             return render(request, 'registration/register.html', {'error_message': 'Passwords do not match'})
         
-        User.objects.create(username=username, password=password).save()
+        user = User.objects.create(username=username, password=password)
+        user.save()
+
+        request.session['user_id'] = user.id
+        
+        return redirect('/polls/')
     
     return render(request, 'registration/register.html')
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return render(request, 'registration/login.html', {'error_message': "Invalid username or password"})
+
+        check_password = User.objects.get(username=username).check_password(password)
+        if not check_password:
+            return render(request, 'registration/login.html', {'error_message': "Invalid username or password"})
+        
+        request.session['user_id'] = user.id
+        
+        return redirect('/polls/')
+        
+
+    return render(request, 'registration/login.html')
+
+def logout(request):
+    request.session.flush()
+    return redirect('/login/')

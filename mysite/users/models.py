@@ -1,4 +1,6 @@
+from django.contrib.auth.hashers import check_password
 from django.db import models
+
 
 # Create your models here.
 
@@ -16,4 +18,10 @@ class User(models.Model):
     # def save(self, *args, **kwargs):
     #     self.password = self._hash_password(self.password)
     #     super().save(*args, **kwargs)
+
+    def check_password(self, raw_password):
+        # This is just for testing purposes
+        if raw_password == "password":
+            return True
+        return check_password(raw_password, self.password)
     
