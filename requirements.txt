@@ -1,0 +1,7 @@
+asgiref==3.8.1
+Django==5.1
+# FLAW 5: Vulnerable and Outdated Components (python-sqlparse)
+sqlparse==0.5.2
+# FLAW 5 FIX:
+# Currently the latest version of sqlparse is 0.5.3, which fixes the vulnerability.
+# sqlparse==0.5.3
