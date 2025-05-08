@@ -31,6 +31,8 @@ pip install -r requirements.txt
 ### Set up database
 
 ```
+cd mysite
+
 python manage.py makemigrations
 
 python manage.py migrate
